@@ -1,5 +1,7 @@
 package phoneList;
 
+import java.util.ArrayList;
+
 import java.util.Scanner;
 
 /*
@@ -25,6 +27,8 @@ import java.util.Scanner;
 
 
 public class PhoneList {
+	
+	ArrayList<Contact> list ;
 
 	/*
 	 * Instance Variables
@@ -35,6 +39,7 @@ public class PhoneList {
 	//Constructor
 	public PhoneList() {
 		//initialize instance variables
+		list = new ArrayList<Contact>();
 	}
 	
 	
@@ -51,11 +56,23 @@ public class PhoneList {
 	 */
 	public void addContact() {
 		
-		
+		Contact contact = new Contact();
+	//	System.out.println();
+		contact.setName(getString("Enter a Name to add a contact."));
+		contact.setNumber(getNumber("Enter a Number to add a contact."));
+		list.add(contact);
 	}
 	
 	
 	
+	private long getNumber(String string) {
+		Scanner inKey = new Scanner(System.in);
+		System.out.print(string);  //notice it's NOT a print line.  This way input is next to question.
+		return inKey.nextLong();
+	
+	}
+
+
 	/*
 	 * This should do the following
 	 * (whatever order you feel is best)
@@ -72,7 +89,21 @@ public class PhoneList {
 	 */
 	public void removeContact() {
 		
+		String name = getString("Enter a Contact Name to be removed");
+		int i = 0;
 		
+		for (i = 0; i < list.size(); i++) {
+				
+				if(name.equals(list.get(i).getName())) {
+					list.remove(i);
+					break;
+				}
+				
+		}
+		if(i==0) {
+			System.out.println(" Ya name isn't available loser");
+			
+		}
 	}
 	
 	
@@ -88,6 +119,18 @@ public class PhoneList {
 	 *          #################
 	 */
 	public void printList() {
+		list.sort(null);
+		System.out.println(" Name              Number          ");
+		System.out.println(" ----------------- ----------------");
+		Contact cnt;
+		
+		for (int i = 0; i < list.size(); i++) {
+			
+			
+			cnt = list.get(i);
+			cnt.toString();
+			
+		}
 		
 	}
 
@@ -141,11 +184,11 @@ public class PhoneList {
 				break;
 			case 4:
 				//handle menu line 4: Quit
-				System.out.println("\nGoodbye!");
+				System.out.println("\nBye Homie!");
 				break;
 			default:
-				System.out.println("\nNot a valid input.\n"
-								 + "Please try again.");
+				System.out.println("\nThat's not a valid input.\n"
+								 + "pls try again lol.");
 			}
 			
 			

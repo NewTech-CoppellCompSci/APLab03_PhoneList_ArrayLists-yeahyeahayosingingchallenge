@@ -10,50 +10,38 @@ package phoneList;
  * Needed Methods
  *   - Constructor(s)
  *   - getter methods
- *   - Setter methods not necessary unless Constructor
- *        initialize variables.
- *   - Override toString() so that Contact can
- *        be printed as part of a list.
+ *   - Setter methods not necessary unless Constructor initialize variables.
+ *   - Override toString() so that Contact can be printed as part of a list.
  * 
  */
 
 
 
 public class Contact {
-	private String Name;
-	private long Number;
 	
-	public  String getName() {
+	 private String name;
+	 private String number;//string because int can hold a limited number
+
+	public Contact(String name, String number) {
+		this.name = name;
+		this.number = number;
+	}
+	
+	public String getName() {//gets the name 
+		return name;
 		
-		return Name;
 	}
 
-	public void setName(String name) {
+	
+	public String getNumber() {//gets the number
+		return number;
 		
-		Name = name;
 	}
-
-	public long getNumber() {
-		
-		return Number;
-	}
-
-	public boolean equals(Contact obj) {
-		// TODO Auto-generated method stub
-		return Name.equals(getName());
-		//return Name.equals(getName()) &&  Number==obj.getNumber();
-
-	}
-
-	public void setNumber(long number) {
-		Number = number;
-	}
-
+	
 	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "Name : "+Name+" Phone : "+Number;
+	public String toString() {//returns the stuff 
+		return name + "= " + number;
 	}
-   
+
 	
 }

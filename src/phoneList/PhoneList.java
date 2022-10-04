@@ -1,8 +1,8 @@
 package phoneList;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 
-import java.util.Scanner;
 
 /*
  * Phone List
@@ -28,18 +28,18 @@ import java.util.Scanner;
 
 public class PhoneList {
 	
-	ArrayList<Contact> list ;
-
+	private ArrayList<Contact> internalList;
 	/*
 	 * Instance Variables
+	 * 
 	 */
 	
 	
 	
 	//Constructor
 	public PhoneList() {
+		internalList = new ArrayList<Contact>();
 		//initialize instance variables
-		list = new ArrayList<Contact>();
 	}
 	
 	
@@ -55,24 +55,25 @@ public class PhoneList {
 	 *        it's been added
 	 */
 	public void addContact() {
-		
-		Contact contact = new Contact();
-	//	System.out.println();
-		contact.setName(getString("Enter a Name to add a contact."));
-		contact.setNumber(getNumber("Enter a Number to add a contact."));
-		list.add(contact);
-	}
-	
-	
-	
-	private long getNumber(String string) {
 		Scanner inKey = new Scanner(System.in);
-		System.out.print(string);  //notice it's NOT a print line.  This way input is next to question.
-		return inKey.nextLong();
-	
+		System.out.println("What is the contact's name?!");
+		String name = inKey.next();
+		System.out.println("What is the contact's phone number");
+		String number = inKey.next();
+		System.out.println("The contact has been added to your list");
+		int i = 0;
+		while(i<internalList.size() && internalList.get(i).getName() != name) {
+			i++;
+		}	if(i<internalList.size()) {
+			internalList.add(i, new Contact(name, number));
+			} else {
+			internalList.add(new Contact(name, number));
+		}
+		
 	}
-
-
+	
+	
+	
 	/*
 	 * This should do the following
 	 * (whatever order you feel is best)
@@ -88,21 +89,28 @@ public class PhoneList {
 	 *        
 	 */
 	public void removeContact() {
-		
-		String name = getString("Enter a Contact Name to be removed");
+		Scanner inKey = new Scanner(System.in);
+		System.out.println("What contact do you want to remove?!");
+		String name = inKey.next();
 		int i = 0;
-		
-		for (i = 0; i < list.size(); i++) {
-				
-				if(name.equals(list.get(i).getName())) {
-					list.remove(i);
-					break;
-				}
-				
-		}
-		if(i==0) {
-			System.out.println(" Ya name isn't available loser");
+		boolean right = false;
+		int ind = 0;
+		while(i < internalList.size()) {
 			
+			System.out.println(internalList.get(i).getName());
+			System.out.println(name);
+			if (internalList.get(i).getName().equals(name)) {
+				right = true;
+				ind = i;
+			}
+			i++;
+		}
+		System.out.println(right);
+		if(right) {
+			internalList.remove(ind);
+			System.out.println(name + " has now been removed your contact list");
+		} else {
+			System.out.println(name + " is invalid lololo (+_+)");
 		}
 	}
 	
@@ -118,20 +126,9 @@ public class PhoneList {
 	 *          -----------------
 	 *          #################
 	 */
-	public void printList() {
-		list.sort(null);
-		System.out.println(" Name              Number          ");
-		System.out.println(" ----------------- ----------------");
-		Contact cnt;
-		
-		for (int i = 0; i < list.size(); i++) {
-			
-			
-			cnt = list.get(i);
-			cnt.toString();
-			
-		}
-		
+	public void printList() 
+	{
+		System.out.println(internalList);
 	}
 
 	
@@ -184,11 +181,11 @@ public class PhoneList {
 				break;
 			case 4:
 				//handle menu line 4: Quit
-				System.out.println("\nBye Homie!");
+				System.out.println("\nGoodbye!");
 				break;
 			default:
-				System.out.println("\nThat's not a valid input.\n"
-								 + "pls try again lol.");
+				System.out.println("\nNot a valid input.\n"
+								 + "Please try again.");
 			}
 			
 			

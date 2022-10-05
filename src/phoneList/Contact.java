@@ -1,5 +1,6 @@
 package phoneList;
 
+
 /*
  * This contains info for a single contact
  * 
@@ -10,38 +11,43 @@ package phoneList;
  * Needed Methods
  *   - Constructor(s)
  *   - getter methods
- *   - Setter methods not necessary unless Constructor initialize variables.
- *   - Override toString() so that Contact can be printed as part of a list.
+ *   - Setter methods not necessary unless Constructor
+ *        initialize variables.
+ *   - Override toString() so that Contact can
+ *        be printed as part of a list.
  * 
  */
 
 
 
 public class Contact {
+	private String Name;
+	private long Number;
 	
-	 private String name;
-	 private String number;//string because int can hold a limited number
-
-	public Contact(String name, String number) {
-		this.name = name;
-		this.number = number;
+	public Contact (String Name, long Number) {
+		this.Name = Name;
+		this.Number = Number;
 	}
+	public String getName() {
 	
-	public String getName() {//gets the name 
-		return name;
+		return Name;//gets name
+	}
+	public long getNumber() {
+		return Number;//gets the name
 		
 	}
-
-	
-	public String getNumber() {//gets the number
-		return number;
-		
+	public void setName(String Name) {
+		this.Name = Name;//sets the name
 	}
-	
+	public void setNumber(long Number) {
+		this.Number = Number;//sets the number
+	}
 	@Override
-	public String toString() {//returns the stuff 
-		return name + "= " + number;
+	public String toString() {//makes it easier to print by name
+		return Name + "   " + Number;
 	}
-
 	
 }
+
+
+
